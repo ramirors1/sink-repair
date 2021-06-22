@@ -16,8 +16,9 @@ export const Requests = () => {
                 </li>`
                 ).join("")}
         </ul>`
+            
 return html
-
+            }
 // export const requests = () => {
 //     const requests = getRequests() // grab the local state of the requests data
 //     let html = "<ul>"
@@ -28,4 +29,4 @@ return html
     
 
 //     return html
-// }
+//}
