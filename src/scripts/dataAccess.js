@@ -19,6 +19,35 @@ export const fetchRequests = () => {
             }
         )
 }
+
+export const sendRequest = (userServiceRequest) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userServiceRequest)
+    }
+
+    const mainContainer = document.querySelector("#container");
+    
+    return fetch(`${API}/requests`, fetchOptions)
+        .then(response => response.json())
+        .then(() => {
+            mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+            // do something after the POST is finished. Stay tuned for what to put here!
+        })
+}
+export const deleteRequest = (id) => {
+    return fetch(`${API}/requests/${id}`, { method: "DELETE" })
+        .then(
+            () => {
+                const mainContainer = document.querySelector("#container");
+  
+                mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+            }
+        )
+}
 // export const getRequests = () => {
     
 //     const newOrder = {...dataAccess.requests}

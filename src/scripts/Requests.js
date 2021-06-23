@@ -1,8 +1,16 @@
-import { getRequests } from "./dataAccess.js"
-
+import { getRequests, deleteRequest } from "./dataAccess.js"
+ 
 export const Requests = () => {
     const requests = getRequests() // grab the local state of the requests data
+    
+    const mainContainer = document.querySelector("#container")
 
+mainContainer.addEventListener("click", click => {
+    if (click.target.id.startsWith("request--")) {
+        const [,requestId] = click.target.id.split("--")
+        deleteRequest(parseInt(requestId))
+    }
+})
     let html = `
         <ul class = "requestClass">
             ${
@@ -13,12 +21,18 @@ export const Requests = () => {
                     ${request.address}
                     ${request.budget}
                     ${request.neededBy}
+                    <button class="request__delete"
+                            id="request--${request.id}">
+                        Delete
+                    </button>
                 </li>`
                 ).join("")}
         </ul>`
             
 return html
             }
+                
+            
 // export const requests = () => {
 //     const requests = getRequests() // grab the local state of the requests data
 //     let html = "<ul>"
